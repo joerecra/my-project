@@ -39,7 +39,7 @@ pipeline {
         // Agrega más etapas según sea necesario para cada rama
         stage('Deploy'){
             steps {
-
+                echo "Deploy"
             }
         }
     }
