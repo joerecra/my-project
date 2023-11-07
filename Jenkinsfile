@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        BRANCH_NAME = "master"
+    }
     stages {
         stage('Build') {
             steps {
@@ -34,5 +37,15 @@ pipeline {
             }
         }
         // Agrega más etapas según sea necesario para cada rama
+        stage('Deploy'){
+            steps {
+
+            }
+        }
+    }
+    post {
+        always {
+            echo 'hi'
+        }
     }
 }
