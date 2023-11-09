@@ -1,18 +1,23 @@
 pipeline {
     agent any
-    environment {
-        BRANCH_NAME = "master"
-    }
     stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    checkout scm
+                }
+            }
+        }
         stage('Build') {
             steps {
                 script {
                     if (env.BRANCH_NAME == 'master') {
                         echo 'Building master branch...'
+                        sh 'mvn clean install'                        
                         // Acciones de construcción para la rama master
-                    } else if (env.BRANCH_NAME == 'develop') {
-                        echo 'Building develop branch...'
-                        // Acciones de construcción para la rama develop
+                    } else if (env.BRANCH_NAME == 'staging') {
+                        echo 'Building staging branch...'
+                        // Acciones de construcción para la rama staging
                     } else {
                         echo "Building feature branch: ${env.BRANCH_NAME}"
                         // Acciones de construcción para otras ramas (feature branches)
@@ -26,9 +31,9 @@ pipeline {
                     if (env.BRANCH_NAME == 'master') {
                         echo 'Running tests for master branch...'
                         // Acciones de prueba para la rama master
-                    } else if (env.BRANCH_NAME == 'develop') {
-                        echo 'Running tests for develop branch...'
-                        // Acciones de prueba para la rama develop
+                    } else if (env.BRANCH_NAME == 'staging') {
+                        echo 'Running tests for staging branch...'
+                        // Acciones de prueba para la rama staging
                     } else {
                         echo "Running tests for feature branch: ${env.BRANCH_NAME}"
                         // Acciones de prueba para otras ramas (feature branches)
