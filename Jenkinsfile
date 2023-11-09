@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        BRANCH_NAME = "master"
-    }
     stages {
         stage('Checkout') {
             steps {
@@ -16,6 +13,7 @@ pipeline {
                 script {
                     if (env.BRANCH_NAME == 'master') {
                         echo 'Building master branch...'
+                        sh 'mvn clean install'                        
                         // Acciones de construcción para la rama master
                     } else if (env.BRANCH_NAME == 'staging') {
                         echo 'Building staging branch...'
