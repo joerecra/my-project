@@ -53,7 +53,7 @@ pipeline {
     }
     post {
         always {
-            echo 'hi'
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
         }
     }
 }
