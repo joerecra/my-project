@@ -44,6 +44,14 @@ pipeline {
                 }
             }
         }
+        stage('Archive JAR') {
+            steps {
+                script {
+                    // Archive the generated JAR file as an artifact
+                    archiveArtifacts artifacts: 'build/libs/**/*.jar', allowEmptyArchive: true
+                }
+            }
+        }
         // Agrega más etapas según sea necesario para cada rama
         stage('Deploy'){
             steps {
@@ -53,7 +61,7 @@ pipeline {
     }
     post {
         always {
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            echo 'hi'
         }
     }
 }
