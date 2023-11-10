@@ -48,7 +48,7 @@ pipeline {
             steps {
                 script {
                     // Archive the generated JAR file as an artifact
-                    archiveArtifacts artifacts: 'build/libs/**/*.jar', allowEmptyArchive: true
+                    archiveArtifacts artifacts: '**/*.jar', allowEmptyArchive: true
                 }
             }
         }
